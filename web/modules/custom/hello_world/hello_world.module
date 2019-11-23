@@ -17,3 +17,43 @@ function hello_world_help($route_name, RouteMatchInterface $route_match)
     default:
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function hello_world_theme($existing, $type, $theme, $path)
+{
+  return [
+    'hello_world_salutation' => [
+      'variables' => [
+        'salutation' => NULL,
+        'target' => NULL,
+        'ovverrides' => FALSE
+      ],
+    ],
+  ];
+}
+
+/**
+ * Default preprocessor function for the hello_world_salutation theme hook.
+ */
+function template_preprocess_hello_world_salutation(&$variables)
+{
+  $variables['attributes'] = [
+    'class' => ['salutation'],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestion_HOOK().
+ */
+function hello_world_hook_theme_suggestion_hello_world_salutation($variables)
+{
+  $suggestions = [];
+
+  if ($variables['overridden'] == TRUE) {
+    $suggestions[] = 'hello_world_salutation_overriden';
+  }
+
+  return $suggestions;
+}

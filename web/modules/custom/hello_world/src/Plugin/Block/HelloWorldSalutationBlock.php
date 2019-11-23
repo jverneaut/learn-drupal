@@ -62,8 +62,6 @@ class HelloWorldSalutationBlock extends BlockBase implements ContainerFactoryPlu
    */
   public function build()
   {
-    return [
-      '#markup' => $this->salutation->getSalutation(),
-    ];
+    return $this->salutation->getSalutationComponent();
   }
 }
